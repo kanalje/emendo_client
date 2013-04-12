@@ -1,4 +1,5 @@
-.DS_Store
-packages
-.project
+*~
+.buildlog
 pubspec.lock
+packages
+out/
