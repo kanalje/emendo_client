@@ -103,7 +103,7 @@ class PageController{
       var page = new Page();
       page.id = item['id'] == null ? pages.length+1 : int.parse(item['id']);
       page.title = item['name'];
-      page.content = item['content'];
+      page.content = item['content']  == null ? '' : item['content'];
       page.parentId = int.parse(item['parentId']);
       page.children = new List<int>();
       
@@ -126,8 +126,14 @@ class PageController{
   }
   
   loadData(String localStorageDescriptor) {
+    var pagesJSON = '{"pages": [{"id":"1", "name":"www.emendo.no", "parentId":"0"},{"id":"2", "name":"Katt", "parentId":"1"},{"id":"3", "name":"Hund", "parentId":"1"},{"id":"4", "name":"Fisk", "parentId":"1"},{"id":"5", "name":"Norsk Skogkatt", "parentId":"2"},{"id":"6", "name":"Perser", "parentId":"2"},{"id":"7", "name":"Retriever", "parentId":"3"},{"id":"8", "name":"Labrador Retriever", "parentId":"7"},{"id":"9", "name":"Golden Retriever", "parentId":"7"},{"id":"10", "name":"Torsk", "parentId":"4"},{"id":"11", "name":"Stekt Torsk", "parentId":"10"},{"id":"12", "name":"Kokt Torsk", "parentId":"10"}]}';
     String a = window.localStorage.$dom_getItem(localStorageDescriptor);
-    parseJSON(a);
+    if (a == null) {
+      parseJSON(pagesJSON);
+    }
+    else {
+      parseJSON(a);
+    }
     updateAllChildren();
   }
   
