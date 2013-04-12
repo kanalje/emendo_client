@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+  <body>   
+  
+    <element name="x-split-table" constructor="SplitTable" extends="div" class="row-fluid">    
+      
+      <template>
+        
+        <style>
+          @import url("../css/bootstrap.css");
+        </style>
+        
+        <div class="span12">
+          <h4>Child Pages</h4>
+          <div class="row-fluid" template iterate="part in valueMapParts">
+            <div class="span3">
+              <table class="table table-condensed">
+                <thead>
+                  <tr>
+                    <th>Page ID</th>
+                    <th>Title</th>
+                  </tr>
+                </thead>
+                <tbody template iterate="key in part.keys">
+                  <tr>
+                    <td>{{key}}</td>
+                    <td>{{part[key]}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="span1"> </div>
+          </div>
+        </div>
+      </template>
+      
+      <script type="application/dart" src="split_table.dart"></script>
+    
+    </element>
+    
+  </body>
+</html>

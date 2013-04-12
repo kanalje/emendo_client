@@ -1,0 +1,59 @@
+body{
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+.tree-node {
+  display: block;
+  position:relative;
+  margin-left: 10px;
+}
+
+
+.tree-node-area:hover {
+   background:#999999;
+   cursor:pointer;
+}
+
+.active-node,
+.active-node:hover{
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+  background-color: #0088cc;
+}
+
+
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+td {
+  width: 70%;
+}
+
+.close-red {
+  float: right;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 20px;
+  background: transparent;
+  border: 0;
+  color: #ff0000;
+  text-shadow: 0 1px 0 #ffffff;
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+}
+
+.close-red:hover,
+.close-red:focus {
+  color: #ff0000;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
