@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+  <body>   
+  
+    <element name="x-tree-node" constructor="TreeNode" extends="div">    
+      
+      <template>
+        
+        <div class="{{nodeAreaClasses}}" on-click="handleClick()" on-double-click="handleDoubleClick()">
+          <i class="{{icon}}"></i> {{title}}
+        </div>
+        
+        <template instantiate="if expanded == true">
+            <content></content>
+        </template>        
+      
+        <style>
+          @import url("../css/bootstrap.css");
+          @import url("../emendo_client.css");
+          
+        </style>
+      
+      </template>
+      
+      <script type="application/dart" src="tree_node.dart"></script>
+    
+    </element>
+    
+  </body>
+</html>
