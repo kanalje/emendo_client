@@ -5,7 +5,7 @@ import 'dart:json';
 import 'dart:html';
 
 import 'emendo_client.dart';
-import 'emendo/page.dart';
+import 'model/page.dart';
 
 class PageController{
 

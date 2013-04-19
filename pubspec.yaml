@@ -5,3 +5,4 @@ dependencies:
   js: any
   browser: any
   web_ui: any
+  widget: any

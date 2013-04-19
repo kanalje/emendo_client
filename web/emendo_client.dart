@@ -3,11 +3,13 @@ library emendo;
 import 'dart:html';
 import 'dart:json';
 import 'package:web_ui/web_ui.dart';
-import 'emendo/page.dart';
+import 'model/page.dart';
 import 'page_controller.dart';
-import 'tree_node.dart';
+import 'components/tree_node.dart';
 import 'dart:async';
-import 'form_new_page.dart';
+import 'components/form_new_page.dart';
+import 'package:widget/effects.dart';
+import 'package:widget/widget.dart';
 
 PageController pageController;
 
@@ -49,9 +51,6 @@ void setNodeSelected(int i) {
 
 Element getElementById(String id) {
   Element elem = query('#$id');
-  if (elem == null){
-    throw new ExpectException('No element with id #$id found.');
-  }
   return elem;
 }
 
