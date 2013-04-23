@@ -13,26 +13,35 @@ class TreeNode extends WebComponent {
   var icon;
   bool expanded = true;
   bool colapsible;
-  List<String> nodeAreaClasses = ['tree-node-area', 'unselectable'];
+  List<String> nodeAreaClasses = ['tree-node-area', 
+                                  'unselectable'];
   TreeView treeViewObject;
   
   
   void handleClick() {
-    setNodeSelected(index);
-    treeViewObject.setSelectedNode(this);
+    setSelectedNode(index);
+    treeViewObject.setSelectedTreeNode(this);
   }
   
   void handleDoubleClick() {
-    if (colapsible){
-      if (expanded){
-        icon = "icon-plus-sign";
-        expanded = false;
-      }
-      else{
+    expanded = !expanded;
+    setIcon();      
+  }
+ 
+  
+  void setIcon() {
+    if (colapsible) {
+      if (expanded) {
         icon = "icon-minus-sign";
-        expanded = true;
+      }
+      else {
+        icon = "icon-plus-sign";
       }
     }
-  }  
+    else {
+      icon = "icon-stop";
+    }
+  }
+
 }
 

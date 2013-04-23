@@ -14,74 +14,70 @@ class PageController{
   Stream onChange;
   
   PageController(){
+    pages = new Map<int, Page>();
     sc = new StreamController();
-    pages = new Map<int, Page>();    
     onChange = sc.stream.asBroadcastStream();
   }  
   
   Stream get stream => onChange;
   
   void addPage(var pageId, var title, var content, var parentId) {
-    var page = new Page();
+    Page page = new Page();
     page.id = pageId == null ? pages.length+1 : pageId;
     page.title = title;
     page.content = content;
     page.parentId = parentId;
     page.children = new List<int>();
     
-    //Add this page to the page map
+    Page parent = getPage(parentId);
+    parent.addChild(page.id);
+    
     pages[page.id] = page;
     
-    //notify the streamcontroller
     sc.add('Added ${page.id}'); 
   }
   
   
   void movePage(int id, int newParentId) {
-    var page = getPage(id);
+    Page page = getPage(id);
     
-    //Remove the page from the old parents list of children
-    getPage(page.parentId).children.remove(id);
+    Page oldParent = getPage(page.parentId);
+    oldParent.removeChild(page.id);
     
-    //Update the page's parent reference
+    Page newParent = getPage(newParentId);
+    newParent.addChild(page.id);
     page.parentId = newParentId;
     
-    //Add the page to the new parents list of children
-    getPage(newParentId).children.add(id);
     sc.add('Added ${page.id}');
   }
   
   Page deletePage(int id) {
-    print('Deleting page $id');
-    var page = getPage(id);
-    getPage(page.parentId).children.remove(id);
-    pages.remove(id);
-    print('Finished deleting page $id');
+    Page page = getPage(id);
     
-    print('Notifying sc');
+    Page parent = getPage(page.parentId);
+    parent.removeChild(page.id);
+    
+    pages.remove(id);
+
     //notify the streamcontroller
     sc.add('Deleted  $id');
-    print('Back from sc');
   }
   
   
   Page deletePageWithMethod(int id, String method) {
     var page = getPage(id);
-    List children = page.children;
+    List children = new List.from(page.children);
     if (method == 'move') {
       for (var childId in children) {
-        print('Moving child $childId');
         movePage(childId, page.parentId);
-        print('Finished moving child $childId');
+        print("moved page $childId");
       }
     }
     else {
       for (var childId in children) {
         deletePageWithMethod(childId, 'wipe');
       }
-      
     }
-    print('Calling deletePage($id)');
     deletePage(id);
   }
   

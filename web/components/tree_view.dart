@@ -22,21 +22,23 @@ class TreeView extends WebComponent {
       if (args[0] == 'Added'){
         
         Element parent = query('#node$selectedNode');
-        parent.xtag.expanded = true;
-        parent.xtag.icon = "icon-minus-sign";
         parent.children.add(growNode(int.parse(args[1])));
+        parent.xtag.colapsible = true;
+        parent.xtag.expanded = true;
+        parent.xtag.setIcon();
         pageController.saveData();
         elementToggle('modal_newPage');
       }
       
       if (args[0] == 'Deleted'){
-        Element parent = query('#node$selectedNode').parent;
-        print(parent.id);
-        print(parent.xtag);
-        parent.xtag.expanded = false;
-        parent.children.remove(query('#node$selectedNode'));
-        setSelectedNode(parent.xtag);
-        elementToggle('modal_deletePage');
+        Element parent = query('#node$args[1]').parent;        
+        parent.children.remove(query('#node$args[1]'));
+        if (parent.queryAll('.tree-node').length == 0){
+          parent.xtag.colapsible = false;
+        }
+        parent.xtag.setIcon();
+        setSelectedTreeNode(parent.xtag);
+       // elementToggle('modal_deletePage');
       }
       
     });
@@ -54,15 +56,12 @@ class TreeView extends WebComponent {
     tn.host.id = 'node$index';
     tn.classes.add('tree-node');
     tn.expanded = index == 1;
-    tn.icon = pageMap[index].children.length != 0 ? "icon-plus-sign" : "icon-stop";
-    if (index == 1) tn.icon = "";
-    tn.colapsible = !(index == 1); 
+    tn.colapsible = !(index == 1 || pageMap[index].children.length == 0);
+    tn.setIcon();
     
     var lifeCycleCaller = new ComponentItem(tn);
     lifeCycleCaller.create();
     lifeCycleCaller.insert();  
-    
-    //treeNodes.add(tn);
     
     for (var childIndex in pageMap[index].children){
       tn.host.children.add(growNode(childIndex));
@@ -71,14 +70,14 @@ class TreeView extends WebComponent {
     return tn.host;
   }
   
-  void setSelectedNode(TreeNode tn) {
+  void setSelectedTreeNode(TreeNode tn) {
   
     if (selectedTreeNode != null) {
       selectedTreeNode.nodeAreaClasses.remove('active-node');
     }
     tn.nodeAreaClasses.add('active-node');
     selectedTreeNode = tn;
-    setNodeSelected(tn.index);
+    setSelectedNode(tn.index);
     
   }
      

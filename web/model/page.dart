@@ -6,6 +6,18 @@ class Page {
   var title;
   var content;
   var parentId;
-  List children;
+  List<int> children;
+  
+  void addChild(int childId) {
+    children.add(childId);
+  }
+  
+  void removeChild(int childId) {
+    children.remove(childId);
+  }
+  
+  bool hasChildren(){
+    return children.length != 0;
+  }
   
 }

@@ -14,6 +14,7 @@
     <link rel="components" href="components/tree_node.html">
     <link rel="components" href="components/modal.html">
     <link rel="components" href="components/form_new_page.html">
+    <link rel="components" href="components/delete_page.html">
   
   </head>
   
@@ -56,7 +57,7 @@
               Table showing the selected page properties
             -->
             <div id="page-properties" class="span8">
-              <button class="close-red" on-click="elementToggle('modal_deletePage')">&times;</button>
+              <button class="close-red" on-click="showDeletePage()">&times;</button>
               <h4>Page Properties</h4>
               <table class="table">
                 <tbody>
@@ -99,10 +100,11 @@
     
     
     
+    <div id="modal_anchor"></div>
     <!--
     Modal Window for Delete Page Confirmation    
     -->
-    <x-modal id="modal_deletePage">
+    <!--<x-modal id="modal_deletePage">
       <div class="modal-header">
         <button type="button" class="close" on-click="elementToggle('modal_deletePage')" aria-hidden="true">&times;</button>
         <h3>Delete Page</h3>
@@ -129,9 +131,9 @@
       </div>      
       <div class="modal-footer">
         <button class="btn" on-click="elementToggle('modal_deletePage')">Close</button>
-        <button class="btn btn-primary" on-click="pageController.deletePageWithMethod(selectedNode, deleteMethod)">Submit</button>
+        <button class="btn btn-primary" on-click="pageController.deletePageWithMethod(selectedNode, deleteMethod); elementToggle('modal_deletePage')">Submit</button>
       </div>
-    </x-modal>
+    </x-modal>-->
     
     
     <script type="application/dart" src="emendo_client.dart"></script>

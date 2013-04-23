@@ -9,6 +9,11 @@ body{
   margin-left: 10px;
 }
 
+.tree-node-area {
+  transition: background .1s ease-in-out;
+  -moz-transition: background .1s ease-in-out;
+  -webkit-transition: background .1s ease-in-out;
+}
 
 .tree-node-area:hover {
    background:#999999;
@@ -22,6 +27,20 @@ body{
   background-color: #0088cc;
 }
 
+#modal_anchor{
+  opacity: 0;
+  transition: opacity .5s ease-in-out;
+  -moz-transition: opacity .5s ease-in-out;
+  -webkit-transition: opacity .5s ease-in-out;
+}
+
+#modal_anchor.open{
+  opacity: 1;
+}
+
+#modal_anchor.close{
+  opacity: 0;
+}
 
 .unselectable {
   -webkit-touch-callout: none;

@@ -8,8 +8,7 @@ import 'page_controller.dart';
 import 'components/tree_node.dart';
 import 'dart:async';
 import 'components/form_new_page.dart';
-import 'package:widget/effects.dart';
-import 'package:widget/widget.dart';
+import 'components/delete_page.dart';
 
 PageController pageController;
 
@@ -28,10 +27,9 @@ void main() {
   
 }
 
-void setNodeSelected(int i) {
+void setSelectedNode(int i) {
   if (selectedNode != i) {
-    selectedNode=i;
-    //updateNamedChildrenMap(); 
+    selectedNode=i; 
   }
 }
 
@@ -54,6 +52,20 @@ Element getElementById(String id) {
   return elem;
 }
 
+
+void showDeletePage() {
+  DeletePage dp = new DeletePage();
+  dp.host = new Element.html('<x-delete-page></x-delete-page>');
+  var lifeCycleCaller = new ComponentItem(dp);
+  lifeCycleCaller.create();
+  lifeCycleCaller.insert(); 
+  
+  Element anchor = query('#modal_anchor');
+  anchor.append(dp.host);
+  anchor.classes.add('open');
+  
+
+}
 
 void elementToggle(var descriptor){
   query('#' + descriptor).xtag.toggle();
