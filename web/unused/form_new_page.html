@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+  <body>   
+  
+    <element name="x-form-new-page" constructor="FormNewPage" extends="div">    
+      
+      <template>
+        
+        <style>
+          @import url("../css/bootstrap.css");
+        </style>
+        
+        <div class="form-horizontal">
+          
+          <div class="modal-body">
+            
+            <div class="control-group">
+              <label class="control-label" for="form-newpage-title">
+                Page title
+              </label>
+              <div class="controls">
+                <input type="text" id="form-newpage-title" name="form-newpage-title" bind-value="title" required>
+              </div>
+            </div>
+            
+            <div class="control-group">
+              <label class="control-label" for="form-newpage-content">
+                Text body
+              </label>
+              <div class="controls">
+                <input type="textarea" id="form-newpage-content" name="form-newpage-content" bind-value="content">
+              </div>
+            </div>
+          
+          </div> <!-- modal-body end -->
+            
+          <div class="modal-footer">
+            <button class="btn" on-click="elementToggle('modal_newPage')">Close</button>
+            <button class="btn btn-primary" on-click="submitForm(); elementToggle('modal_newPage')">Submit</button>
+          </div>
+          
+        </div>     
+      </template>
+      
+      <script type="application/dart" src="form_new_page.dart"></script>
+    
+    </element>
+    
+  </body>
+</html>

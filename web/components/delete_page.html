@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html>
+   
+  <body>   
+    
+    <element name="x-delete-page" constructor="DeletePage" extends="div">  
+      
+      <template>
+        
+        <div class="modal-backdrop">
+        </div>
+          
+        <div class="modal">
+          
+          <div class="modal-header">
+            <button type="button" class="close" on-click="close()" aria-hidden="true">&times;</button>
+            <h3>Delete Page</h3>
+          </div>
+          
+          <div class="modal-body">
+            <h4></h4>
+            <template instantiate="if pageController.getPage(selectedNode).children.length != 0">
+              <p>This page has child nodes. How should they be treated?</p>
+              <label class="radio">        
+                <input  type="radio" 
+                        name="delete-page-option" 
+                        value="move" 
+                        bind-value="deleteMethod"
+                        selected>Move child nodes up one level.
+              </label>
+              <label class="radio">
+                <input  type="radio" 
+                        name="delete-page-option"  
+                        value="wipe" 
+                        bind-value="deleteMethod">Delete all child nodes.
+              </label>
+            </template>
+            <p>Are you sure you want to delete the page with id {{selectedNode}}?</p>  
+          </div>      
+          
+          <div class="modal-footer">
+            <button class="btn" on-click="close()">Close</button>
+            <button class="btn btn-primary" on-click="submit()">Submit</button>
+          </div>
+        
+        </div>
+ 
+        <style>
+          @import url("../css/bootstrap.css");
+        </style>
+        
+      </template> 
+      
+      <script type="application/dart" src="delete_page.dart"></script>
+    
+    </element>
+  
+  </body>
+
+</html>
