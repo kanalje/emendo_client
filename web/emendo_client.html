@@ -12,9 +12,8 @@
     -->
     <link rel="components" href="components/tree_view.html">
     <link rel="components" href="components/tree_node.html">
-    <link rel="components" href="components/modal.html">
-    <link rel="components" href="components/form_new_page.html">
     <link rel="components" href="components/delete_page.html">
+    <link rel="components" href="components/new_page.html">
   
   </head>
   
@@ -76,9 +75,7 @@
                 </tbody>
               </table>
               
-              <button class="btn" on-click="elementToggle('modal_newPage')">New Page</button>
-
-              <!--<x-split-table value-map={{namedChildrenMap}} height={{5}}></x-split-table>-->
+              <button class="btn" on-click="showNewPage()">New Page</button>
 
             </div> <!-- End of #page-properties-->
           </div> <!-- End of #main-container-->  
@@ -86,55 +83,7 @@
       </div>
     </div>
     
-    <!--
-    Modal Window for New Page Form
-    -->
-    <x-modal id="modal_newPage">
-      <div class="modal-header">
-        <button type="button" class="close" on-click="elementToggle('modal_newPage')" aria-hidden="true">&times;</button>
-        <h3>New Page</h3>
-      </div>
-        <x-form-new-page id="form-new-page" parent-id="{{selectedNode}}"></x-form-new-page>
-    </x-modal>    
-    
-    
-    
-    
     <div id="modal_anchor"></div>
-    <!--
-    Modal Window for Delete Page Confirmation    
-    -->
-    <!--<x-modal id="modal_deletePage">
-      <div class="modal-header">
-        <button type="button" class="close" on-click="elementToggle('modal_deletePage')" aria-hidden="true">&times;</button>
-        <h3>Delete Page</h3>
-      </div>
-      <div class="modal-body">
-        <h4></h4>
-        <template instantiate="if pageController.getPage(selectedNode).children.length != 0">
-          <p>This page has child nodes. How should they be treated?</p>
-          <label class="radio">        
-            <input  type="radio" 
-                    name="delete-page-option" 
-                    value="move" 
-                    bind-value="deleteMethod"
-                    selected>Move child nodes up one level.
-          </label>
-          <label class="radio">
-            <input  type="radio" 
-                    name="delete-page-option"  
-                    value="wipe" 
-                    bind-value="deleteMethod">Delete all child nodes.
-          </label>
-        </template>
-        <p>Are you sure you want to delete the page with id {{selectedNode}}?</p>  
-      </div>      
-      <div class="modal-footer">
-        <button class="btn" on-click="elementToggle('modal_deletePage')">Close</button>
-        <button class="btn btn-primary" on-click="pageController.deletePageWithMethod(selectedNode, deleteMethod); elementToggle('modal_deletePage')">Submit</button>
-      </div>
-    </x-modal>-->
-    
     
     <script type="application/dart" src="emendo_client.dart"></script>
     <script src="packages/browser/dart.js"></script>

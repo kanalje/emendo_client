@@ -4,7 +4,7 @@ import 'dart:async';
 import 'dart:json';
 import 'dart:html';
 
-import 'emendo_client.dart';
+//import 'emendo_client.dart';
 import 'model/page.dart';
 
 class PageController{
@@ -52,15 +52,14 @@ class PageController{
   }
   
   Page deletePage(int id) {
-    Page page = getPage(id);
     
+    Page page = getPage(id);
     Page parent = getPage(page.parentId);
     parent.removeChild(page.id);
-    
+
     pages.remove(id);
 
-    //notify the streamcontroller
-    sc.add('Deleted  $id');
+    sc.add('Deleted $id');
   }
   
   
@@ -70,7 +69,6 @@ class PageController{
     if (method == 'move') {
       for (var childId in children) {
         movePage(childId, page.parentId);
-        print("moved page $childId");
       }
     }
     else {

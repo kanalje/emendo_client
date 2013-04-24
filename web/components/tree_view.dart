@@ -17,28 +17,29 @@ class TreeView extends WebComponent {
     this.children.add(growNode(1));      
     pageController.onChange.listen((String event) {
       
+      print(event);
       List<String> args = event.split(' ');
       
       if (args[0] == 'Added'){
-        
-        Element parent = query('#node$selectedNode');
-        parent.children.add(growNode(int.parse(args[1])));
+        int id = int.parse(args[1]);
+        Element parent = query('#node${pageMap[id].parentId}');
+        parent.children.add(growNode(id));
         parent.xtag.colapsible = true;
         parent.xtag.expanded = true;
         parent.xtag.setIcon();
         pageController.saveData();
-        elementToggle('modal_newPage');
+        //elementToggle('modal_newPage');
       }
       
       if (args[0] == 'Deleted'){
-        Element parent = query('#node$args[1]').parent;        
-        parent.children.remove(query('#node$args[1]'));
+        Element parent = query('#node${args[1]}').parent;
+        parent.children.remove(query('#node${args[1]}'));
         if (parent.queryAll('.tree-node').length == 0){
           parent.xtag.colapsible = false;
         }
         parent.xtag.setIcon();
         setSelectedTreeNode(parent.xtag);
-       // elementToggle('modal_deletePage');
+        //elementToggle('modal_deletePage');
       }
       
     });

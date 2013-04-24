@@ -1,14 +1,12 @@
 library emendo;
 
 import 'dart:html';
-import 'dart:json';
 import 'package:web_ui/web_ui.dart';
+
 import 'model/page.dart';
 import 'page_controller.dart';
-import 'components/tree_node.dart';
-import 'dart:async';
-import 'components/form_new_page.dart';
 import 'components/delete_page.dart';
+import 'components/new_page.dart';
 
 PageController pageController;
 
@@ -52,6 +50,17 @@ Element getElementById(String id) {
   return elem;
 }
 
+void showNewPage() {
+  NewPage np = new NewPage();
+  np.host = new Element.html('<x-new-page></x-new-page>');
+  var lifeCycleCaller = new ComponentItem(np);
+  lifeCycleCaller.create();
+  lifeCycleCaller.insert(); 
+  
+  Element anchor = query('#modal_anchor');
+  anchor.append(np.host);
+  anchor.classes.add('open');
+}
 
 void showDeletePage() {
   DeletePage dp = new DeletePage();
