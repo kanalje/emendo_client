@@ -19,26 +19,23 @@ class TreeNode extends WebComponent {
   
   
   void handleClick() {
-    setSelectedNode(index);
     treeViewObject.setSelectedTreeNode(this);
   }
   
   void handleDoubleClick() {
-    expanded = !expanded;
+    if (colapsible) expanded = !expanded;
     setIcon();      
   }
  
-  
   void setIcon() {
-    if (colapsible) {
-      if (expanded) {
-        icon = "icon-minus-sign";
-      }
-      else {
-        icon = "icon-plus-sign";
-      }
+    if (expanded) {
+      icon = "icon-minus-sign";
     }
     else {
+      icon = "icon-plus-sign";
+    }
+    
+    if (!colapsible) {
       icon = "icon-stop";
     }
   }

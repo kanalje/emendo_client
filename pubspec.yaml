@@ -5,3 +5,5 @@ dependencies:
   js: any
   browser: any
   web_ui: any
+  uuid: any
+  appengine_channel: any

@@ -2,17 +2,20 @@ library emendo_page;
 
 class Page {
   
-  int id;
-  var title;
-  var content;
-  var parentId;
-  List<int> children;
+  String id;
+  String siteId;
   
-  void addChild(int childId) {
+  String name;
+  String content;
+ 
+  String parentId;
+  List<String> children;
+  
+  void addChild(String childId) {
     children.add(childId);
   }
   
-  void removeChild(int childId) {
+  void removeChild(String childId) {
     children.remove(childId);
   }
   

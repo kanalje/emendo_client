@@ -3,7 +3,7 @@
 <html>
   <body>   
   
-    <element name="x-tree-node" constructor="TreeNode" extends="div">    
+    <element name="x-tree-node" constructor="TreeNode" extends="div" apply-author-styles>    
       
       <template>
         
@@ -14,12 +14,6 @@
         <template instantiate="if expanded">
             <content></content>
         </template>        
-      
-        <style>
-          @import url("../css/bootstrap.css");
-          @import url("../emendo_client.css");
-          
-        </style>
       
       </template>
       

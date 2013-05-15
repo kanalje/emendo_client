@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+   
+  <body>   
+    
+    <element name="x-login-component" constructor="LoginComponent" extends="div" apply-author-styles>  
+      
+      <template>
+        <template instantiate="if user==null">
+          <button class="btn btn-inverse" on-click="signin()">Sign in</button>
+        </template>
+          
+        <template instantiate="if user!=null">
+          Logged is as {{user}} 
+          <button class="btn btn-link" on-click="signout()">Sign out</button>
+        </template>
+        
+      </template> 
+      
+      <script type="application/dart" src="login_component.dart"></script>
+    
+    </element>
+  
+  </body>
+
+</html>

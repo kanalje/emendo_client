@@ -4,7 +4,7 @@
    
   <body>   
     
-    <element name="x-delete-page" constructor="DeletePage" extends="div">  
+    <element name="x-delete-page" constructor="DeletePage" extends="div" apply-author-styles>
       
       <template>
         
@@ -20,7 +20,7 @@
           
           <div class="modal-body">
             <h4></h4>
-            <template instantiate="if pageController.getPage(selectedNode).children.length != 0">
+            <template instantiate="if pageController.getPage(currentPage).children.length != 0">
               <p>This page has child nodes. How should they be treated?</p>
               <label class="radio">        
                 <input  type="radio" 
@@ -36,7 +36,7 @@
                         bind-value="deleteMethod">Delete all child nodes.
               </label>
             </template>
-            <p>Are you sure you want to delete the page with id {{selectedNode}}?</p>  
+            <p>Are you sure you want to delete the page with id {{currentPage}}?</p>  
           </div>      
           
           <div class="modal-footer">
@@ -46,10 +46,6 @@
         
         </div>
  
-        <style>
-          @import url("../css/bootstrap.css");
-        </style>
-        
       </template> 
       
       <script type="application/dart" src="delete_page.dart"></script>

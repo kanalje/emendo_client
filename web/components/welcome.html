@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+   
+  <body>   
+    
+    <element name="x-welcome" constructor="Welcome" extends="div" apply-author-styles>  
+      
+      <template>
+        <div class="container">
+ 
+          <div class="jumbotron">
+            <h1>Emendo</h1>
+            <p class="lead">A simple test application</p>
+            <button class="btn btn-large btn-success" on-click="signin()">Sign in</button>
+          </div>
+    
+          <hr>
+    
+          <div class="footer">
+            <p>Christian Toftegaard 2013</p>
+          </div>
+    
+        </div> <!-- /container -->
+        
+      </template> 
+      
+      <script type="application/dart">
+        import 'package:web_ui/web_ui.dart';
+        import 'package:js/js.dart' as js;
+        class Welcome extends WebComponent {
+          void signin() {
+            js.context.navigator.id.request();
+          }
+        }
+      </script>
+    
+    </element>
+  
+  </body>
+
+</html>

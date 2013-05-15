@@ -9,62 +9,59 @@ import '../model/page.dart';
         
 class TreeView extends WebComponent {
 
-  
-  Map<int, Page> pageMap;
+  String _rootNodeId;
   static TreeNode selectedTreeNode;
   
   void inserted() {
-    this.children.add(growNode(1));      
+    
+    _rootNodeId = siteController.getRootPageId(currentSite.id);
+    this.children.add(growNode(_rootNodeId));   
+    
     pageController.onChange.listen((String event) {
       
-      print(event);
       List<String> args = event.split(' ');
       
-      if (args[0] == 'Added'){
-        int id = int.parse(args[1]);
-        Element parent = query('#node${pageMap[id].parentId}');
+      if (args[0] == 'Created' && args[1] != _rootNodeId){
+        String id = args[1];
+        Element parent = this.query('#node${pageController.getPage(id).parentId}');
         parent.children.add(growNode(id));
         parent.xtag.colapsible = true;
         parent.xtag.expanded = true;
         parent.xtag.setIcon();
-        pageController.saveData();
-        //elementToggle('modal_newPage');
       }
       
       if (args[0] == 'Deleted'){
-        Element parent = query('#node${args[1]}').parent;
-        parent.children.remove(query('#node${args[1]}'));
+        Element parent = this.query('#node${args[1]}').parent;
+        parent.children.remove(this.query('#node${args[1]}'));
         if (parent.queryAll('.tree-node').length == 0){
           parent.xtag.colapsible = false;
         }
         parent.xtag.setIcon();
         setSelectedTreeNode(parent.xtag);
-        //elementToggle('modal_deletePage');
       }
       
     });
   }
   
- 
-  
-  Element growNode(var index){
+  Element growNode(String index){
     
+    Page page = pageController.getPage(index);
     TreeNode tn = new TreeNode();
     tn.host = new Element.html('<x-tree-node></x-tree-node>');
     tn.treeViewObject = this;
     tn.index = index;
-    tn.title = pageMap[index].title;
+    tn.title = page.name;
     tn.host.id = 'node$index';
     tn.classes.add('tree-node');
-    tn.expanded = index == 1;
-    tn.colapsible = !(index == 1 || pageMap[index].children.length == 0);
+    tn.expanded = page.id == _rootNodeId;
+    tn.colapsible = !(page.id == _rootNodeId || page.children.length == 0);
     tn.setIcon();
     
     var lifeCycleCaller = new ComponentItem(tn);
     lifeCycleCaller.create();
     lifeCycleCaller.insert();  
     
-    for (var childIndex in pageMap[index].children){
+    for (var childIndex in page.children){
       tn.host.children.add(growNode(childIndex));
     }
     
@@ -76,9 +73,11 @@ class TreeView extends WebComponent {
     if (selectedTreeNode != null) {
       selectedTreeNode.nodeAreaClasses.remove('active-node');
     }
+    
     tn.nodeAreaClasses.add('active-node');
     selectedTreeNode = tn;
-    setSelectedNode(tn.index);
+    
+    setCurrentPage(tn.index);
     
   }
      

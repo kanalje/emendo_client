@@ -13,7 +13,7 @@ class DeletePage extends WebComponent {
   }
   
   submit() {
-    pageController.deletePageWithMethod(selectedNode, deleteMethod); 
+    pageController.deletePageWithMethod(currentPage, deleteMethod); 
     close();
   }
   

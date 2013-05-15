@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html>
+  
+  <head>
+    <link rel="import" href="tree_view.html" />
+  </head> 
+  
+  <body>   
+    
+    <element name="x-site-control-component" constructor="SiteControlComponent" extends="div" apply-author-styles> 
+      
+      <template>
+        
+        <div class="container-fluid">
+          <div class="row-fluid">
+    
+            <!--
+            Tree View
+            -->        
+            <div class="span3 well" id="tree-view-container">
+              <h3>Tree View</h3>
+              <x-tree-view id="tw-page-menu"></x-tree-view>
+            </div>
+            
+            <div class="span9">
+              
+              <div class="row-fluid" id="main-container">      
+                
+                <!--
+                  Table showing the selected page properties
+                -->
+                <div id="page-properties" class="span8">
+                  <button class="close-red" on-click="showModal('x-delete-page')">&times;</button>
+                  <h4>Page Properties</h4>
+                  <table class="table">
+                    <tbody>
+                        <tr>
+                          <th>Page ID</th>
+                          <td>{{pageController.getPage(currentPage).id}}</td>
+                        </tr>
+                        <tr>
+                          <th>Title</th>
+                          <td>{{pageController.getPage(currentPage).name}}</td>
+                        </tr>
+                        <tr>
+                          <th>Content</th>
+                          <td>{{pageController.getPage(currentPage).content}}</td>
+                        </tr>
+                    </tbody>
+                  </table>
+                  
+                  <button class="btn" on-click="showModal('x-new-page')">New Page</button>
+    
+                </div> <!-- End of #page-properties-->
+              </div> <!-- End of #main-container-->  
+            </div> <!-- -->
+          </div>
+        </div>
+        
+      </template> 
+      
+      <script type="application/dart" src="site_control_component.dart"></script>
+    
+    </element>
+  
+  </body>
+
+</html>

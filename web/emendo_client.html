@@ -3,90 +3,58 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Sample app</title>
+    <title>Emendo</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="emendo_client.css">
     
     <!--
-    Import components 
+      Import components 
     -->
-    <link rel="components" href="components/tree_view.html">
-    <link rel="components" href="components/tree_node.html">
-    <link rel="components" href="components/delete_page.html">
-    <link rel="components" href="components/new_page.html">
+    <link rel="import" href="components/tree_view.html">
+    <link rel="import" href="components/tree_node.html">
+    <link rel="import" href="components/delete_page.html">
+    <link rel="import" href="components/new_page.html">
+    <link rel="import" href="components/login_component.html">
+    <link rel="import" href="components/site_control_component.html">
+    <link rel="import" href="components/welcome.html">
+    
   
   </head>
   
   <body>  
     
     <!--
-    Navbar    
+      Navbar    
     -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="#">Emendo</a>
+    <div class="container">
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="#">Emendo</a>
+            <x-login-component class="navbar-text pull-right" user="{{currentUser.email}}"></x-login-component>
+          </div>
         </div>
       </div>
     </div>
-    
+
     <hr>
-   
-    <div class="container-fluid">
-      <div class="row-fluid">
-
-        <!--
-        Tree View
-        -->        
-        <div class="span3 well" id="tree-view-container">
-          <h3>Tree View</h3>
-          <x-tree-view id="tw-page-menu" page-map="{{pageController.pages}}"></x-tree-view>
-        </div>
-        
-        <div class="span9">
-          
-          <div class="row-fluid" id="main-container">      
-            
-            <!--
-              Table showing the selected page properties
-            -->
-            <div id="page-properties" class="span8">
-              <button class="close-red" on-click="showDeletePage()">&times;</button>
-              <h4>Page Properties</h4>
-              <table class="table">
-                <tbody>
-                    <tr>
-                      <th>Page ID</th>
-                      <td>{{pageController.pages[selectedNode].id}}</td>
-                    </tr>
-                    <tr>
-                      <th>Title</th>
-                      <td>{{pageController.pages[selectedNode].title}}</td>
-                    </tr>
-                    <tr>
-                      <th>Content</th>
-                      <td>{{pageController.pages[selectedNode].content}}</td>
-                    </tr>
-                </tbody>
-              </table>
-              
-              <button class="btn" on-click="showNewPage()">New Page</button>
-
-            </div> <!-- End of #page-properties-->
-          </div> <!-- End of #main-container-->  
-        </div> <!-- -->
-      </div>
-    </div>
     
+    <div id="content_anchor">
+      <x-welcome></x-welcome>
+    </div>
+        
     <div id="modal_anchor"></div>
     
     <script type="application/dart" src="emendo_client.dart"></script>
     <script src="packages/browser/dart.js"></script>
+    <script type="text/javascript" src="/_ah/channel/jsapi"></script>
+    <script type="text/javascript" src="/js/channel-dart.js"></script>
+    <script src="https://login.persona.org/include.js"></script>
 
   </body>
 

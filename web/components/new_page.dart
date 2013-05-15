@@ -10,7 +10,6 @@ class NewPage extends WebComponent {
   String content = '';
   int parentId;
   
-  
   close() { 
     query('#modal_anchor').classes.remove('open');
     Future future = new Future.delayed(new Duration(milliseconds : 500), null);
@@ -18,7 +17,7 @@ class NewPage extends WebComponent {
   }
   
   submit() {
-    pageController.addPage(null, title, content, selectedNode); 
+    pageController.createPage(title, content, currentPage, currentSite.id); 
     close();
   }
   
